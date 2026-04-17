@@ -30,7 +30,7 @@ export default function Contact() {
     
     try {
       const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbxOh0DWbz_6OZQYfnHLt_SUXys9WgiqDPoGyPGzXPTp7Cee92-cgZhFQqvoaglFL3tC/exec',
+        'https://script.google.com/macros/s/AKfycbxAEjRMQXDlvdMyDclcydpxPeSnOo8Vn8phuj4m5H3_09K3mJAB3aro2Sr_Yv7UaQsGUA/exec',
         {
           method: 'POST',
           mode: 'no-cors',
@@ -40,9 +40,10 @@ export default function Contact() {
           body: JSON.stringify({
             name: formData.name,
             email: formData.email,
-            company: formData.businessType,
-            service: formData.systemNeeded,
+            phone: formData.phone,
+            business: formData.businessType,
             budget: formData.budget,
+            system: formData.systemNeeded,
             message: formData.message,
           }),
         }
