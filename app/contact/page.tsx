@@ -28,25 +28,47 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        businessType: '',
-        systemNeeded: '',
-        budget: '',
-        message: '',
-      });
-    }, 3000);
+    try {
+      const response = await fetch(
+        'https://script.google.com/macros/s/AKfycbxOh0DWbz_6OZQYfnHLt_SUXys9WgiqDPoGyPGzXPTp7Cee92-cgZhFQqvoaglFL3tC/exec',
+        {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            company: formData.businessType,
+            service: formData.systemNeeded,
+            budget: formData.budget,
+            message: formData.message,
+          }),
+        }
+      );
+      
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          businessType: '',
+          systemNeeded: '',
+          budget: '',
+          message: '',
+        });
+      }, 3000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setIsSubmitting(false);
+      alert('There was an error submitting the form. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
