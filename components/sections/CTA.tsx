@@ -29,8 +29,8 @@ export default function CTA() {
             Let's discuss how we can transform your business with intelligent automation and custom systems.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button size="lg" className="glow w-full sm:w-auto">
+            <Link href="/book-call">
+              <Button size="lg" className="glow w-full sm:w-auto hover:scale-105 transition-transform">
                 Book Free 15 Min Consultation
                 <ArrowRight size={16} />
               </Button>

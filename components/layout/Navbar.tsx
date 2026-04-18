@@ -259,7 +259,7 @@ export default function Navbar() {
             {/* CTA Button */}
             <div className="hidden md:block flex-shrink-0">
               <Link
-                href="/contact"
+                href="/book-call"
                 className="px-6 py-2.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-violet-500 rounded-full text-white font-medium text-sm hover:scale-105 transition-transform glow-hover"
               >
                 Book Free 15 Min Consultation
@@ -374,9 +374,9 @@ export default function Navbar() {
                 className="mt-8"
               >
                 <Link
-                  href="/contact"
+                  href="/book-call"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-violet-500 rounded-full text-white font-medium text-lg text-center glow"
+                  className="block w-full px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-violet-500 rounded-full text-white font-medium text-lg text-center glow hover:scale-105 transition-transform"
                 >
                   Book Free 15 Min Consultation
                 </Link>
