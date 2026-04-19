@@ -287,18 +287,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black z-40 md:hidden"
           >
-            <div className="flex flex-col h-full px-6 py-6">
-              {/* Mobile Menu Close Button */}
-              <div className="flex justify-end mb-8">
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  aria-label="Close menu"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
+            <div className="flex flex-col h-full px-6 py-6 pt-24">
               {/* Menu Items - Left Aligned */}
               <div className="flex flex-col space-y-4 flex-1">
                 {navLinks.map((link, index) => (
