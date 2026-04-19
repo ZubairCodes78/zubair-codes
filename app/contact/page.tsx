@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Info } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
@@ -191,6 +191,23 @@ export default function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
+              {/* Premium Notice */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="mb-6 p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.25)] transition-all duration-300"
+              >
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <Info size={20} className="text-blue-500" />
+                  </div>
+                  <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed">
+                    We're not accepting inquiries via email at the moment. Please use the contact form or reach out on WhatsApp for all queries.
+                  </p>
+                </div>
+              </motion.div>
+
               {isSubmitted ? (
                 <div className="glass rounded-2xl p-6 sm:p-8 text-center">
                   <CheckCircle size={64} className="text-green-400 mx-auto mb-4" />
