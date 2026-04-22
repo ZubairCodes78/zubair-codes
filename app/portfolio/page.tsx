@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ExternalLink, Globe, ShoppingCart, BarChart } from 'lucide-react';
+import { ArrowRight, ExternalLink, Globe, ShoppingCart, BarChart, Wrench, FileText } from 'lucide-react';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
@@ -16,21 +16,25 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
+      title: 'Toolmatic – All-in-One Tools Platform',
       category: 'Web Development',
-      description: 'Full-stack e-commerce platform with inventory management, payment processing, and analytics dashboard.',
-      tags: ['Next.js', 'Stripe', 'PostgreSQL'],
-      results: ['300% increase in sales', '60% faster checkout', '40% reduction in support tickets'],
-      image: ShoppingCart,
+      description: 'A modern web platform that provides multiple useful tools in one place with a clean and fast user experience.',
+      tags: ['HTML', 'CSS', 'JavaScript'],
+      results: ['Clean UI', 'Fast performance', 'Multiple tools'],
+      image: Wrench,
+      highlighted: true,
+      liveUrl: 'https://toolmatic.site',
     },
     {
       id: 2,
-      title: 'AI Customer Service Bot',
-      category: 'AI Automation',
-      description: 'Intelligent chatbot that handles 80% of customer inquiries with 95% accuracy rate.',
-      tags: ['Python', 'OpenAI', 'WhatsApp'],
-      results: ['24/7 availability', '80% query resolution', '50% cost reduction'],
-      image: BarChart,
+      title: 'PDFMaster – Smart PDF Tools',
+      category: 'Web Development',
+      description: 'A powerful platform for handling PDF tasks like conversion, merging, and editing with a simple and user-friendly interface.',
+      tags: ['JavaScript', 'Web APIs'],
+      results: ['PDF conversion', 'Document merging', 'Easy editing'],
+      image: FileText,
+      highlighted: true,
+      liveUrl: 'https://pdfmaster.site',
     },
     {
       id: 3,
@@ -123,14 +127,30 @@ export default function Portfolio() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Card
-                  className="cursor-pointer hover:scale-105 transition-transform"
+                  className={`cursor-pointer transition-all duration-300 ${
+                    project.highlighted
+                      ? 'hover:scale-105 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border-blue-500/30'
+                      : 'hover:scale-105'
+                  }`}
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="w-full h-40 sm:h-48 mb-3 sm:mb-4 rounded-xl bg-gradient-to-br from-blue-500/20 via-cyan-500/20 to-violet-500/20 flex items-center justify-center">
-                    <project.image size={48} className="text-blue-400" />
+                  <div
+                    className={`w-full h-40 sm:h-48 mb-3 sm:mb-4 rounded-xl flex items-center justify-center ${
+                      project.highlighted
+                        ? 'bg-gradient-to-br from-blue-500/30 via-cyan-500/30 to-violet-500/30'
+                        : 'bg-gradient-to-br from-blue-500/20 via-cyan-500/20 to-violet-500/20'
+                    }`}
+                  >
+                    <project.image size={48} className={project.highlighted ? 'text-blue-300' : 'text-blue-400'} />
                   </div>
                   <div className="mb-2 sm:mb-3">
-                    <span className="px-2 sm:px-3 py-1 text-xs bg-white/10 rounded-full text-gray-300">
+                    <span
+                      className={`px-2 sm:px-3 py-1 text-xs rounded-full ${
+                        project.highlighted
+                          ? 'bg-blue-500/30 text-blue-200'
+                          : 'bg-white/10 text-gray-300'
+                      }`}
+                    >
                       {project.category}
                     </span>
                   </div>
@@ -138,16 +158,32 @@ export default function Portfolio() {
                     {project.title}
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base mb-3 sm:mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
                     {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 text-xs bg-blue-500/20 rounded-full text-blue-300"
+                        className={`px-2 py-1 text-xs rounded-full ${
+                          project.highlighted
+                            ? 'bg-blue-500/30 text-blue-200'
+                            : 'bg-blue-500/20 text-blue-300'
+                        }`}
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View Live
+                      <ExternalLink size={14} className="ml-1" />
+                    </a>
+                  )}
                 </Card>
               </motion.div>
             ))}
@@ -201,12 +237,26 @@ export default function Portfolio() {
               </ul>
             </div>
 
-            <Link href="/contact" className="w-full">
-              <Button className="w-full">
-                View Live Demo
-                <ExternalLink className="ml-2" size={16} />
-              </Button>
-            </Link>
+            {selectedProject.liveUrl ? (
+              <a
+                href={selectedProject.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                <Button className="w-full">
+                  View Live
+                  <ExternalLink className="ml-2" size={16} />
+                </Button>
+              </a>
+            ) : (
+              <Link href="/contact" className="w-full">
+                <Button className="w-full">
+                  View Live Demo
+                  <ExternalLink className="ml-2" size={16} />
+                </Button>
+              </Link>
+            )}
           </div>
         )}
       </Modal>
@@ -215,4 +265,4 @@ export default function Portfolio() {
 }
 
 // Import icons at the top
-import { TrendingUp, FileText, Database } from 'lucide-react';
+import { TrendingUp, Database } from 'lucide-react';
